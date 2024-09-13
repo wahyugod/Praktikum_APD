@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="2409106010_ZeydanFazleMawla_A1'24_posttest2"/>
+        <attribute name="authors" value="ASUS"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-09-13 10:11:57 PM"/>
+        <attribute name="created" value="QVNVUztMQVBUT1AtSTNHREZUVTc7MjAyNC0wOS0xMzswOToyMDo1MyBQTTsyNjY2"/>
+        <attribute name="edited" value="QVNVUztMQVBUT1AtSTNHREZUVTc7MjAyNC0wOS0xMzsxMDoxMTo1NyBQTTsxOzI3NzA="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="namalengkap, namapanggilan, namauniversitas, namafakultas, namaprodi" type="String" array="False" size=""/>
+            <declare name="nim, umur, beratbadan, a" type="Integer" array="False" size=""/>
+            <declare name="b, tinggibadan" type="Real" array="False" size=""/>
+            <input variable="namalengkap"/>
+            <input variable="namapanggilan"/>
+            <input variable="nim"/>
+            <input variable="namauniversitas"/>
+            <input variable="namafakultas"/>
+            <input variable="namaprodi"/>
+            <input variable="umur"/>
+            <comment text="tinggibadan dalam meter"/>
+            <input variable="tinggibadan"/>
+            <input variable="beratbadan"/>
+            <assign variable="b" expression="beratbadan*2.205"/>
+            <assign variable="a" expression="10%6"/>
+            <output expression="&quot;Nama saya &quot; &amp;namalengkap&amp; &quot; ,biasa dipanggil &quot; &amp;namapanggilan&amp; &quot; dengan NIM &quot; &amp;nim&amp; &quot;. Saya kuliah di Universitas &quot; &amp;namauniversitas&amp; &quot; Fakultas &quot; &amp;namafakultas&amp; &quot; Prodi &quot; &amp;namaprodi&amp; &quot;. Tinggi saya &quot; &amp;tinggibadan&amp; &quot;m dan berat &quot; &amp;beratbadan&amp; &quot;kg atau &quot; &amp;b&amp; &quot; lbs&quot;" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>

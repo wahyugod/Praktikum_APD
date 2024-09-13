@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="Algo"/>
+        <attribute name="authors" value="ASUS"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-09-08 04:57:27 PM"/>
+        <attribute name="created" value="QVNVUztMQVBUT1AtSTNHREZUVTc7MjAyNC0wOS0wNjswOToxMTozNyBQTTsyNjcw"/>
+        <attribute name="edited" value="QVNVUztMQVBUT1AtSTNHREZUVTc7MjAyNC0wOS0wODswNDo1NzoyNyBQTTszOzI3ODY="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="a, b, c, x, y, z" type="Integer" array="False" size=""/>
+            <declare name="p" type="Real" array="False" size=""/>
+            <input variable="a"/>
+            <input variable="b"/>
+            <input variable="c"/>
+            <while expression="a=b and b=c and c=a">
+                <output expression="&quot;Ketiga Umur Tidak Boleh Sama&quot;" newline="True"/>
+                <input variable="a"/>
+                <input variable="b"/>
+                <input variable="c"/>
+            </while>
+            <if expression="a&lt;18">
+                <then>
+                    <assign variable="x" expression="20"/>
+                </then>
+                <else>
+                    <if expression="a&gt;25">
+                        <then>
+                            <assign variable="x" expression="10"/>
+                        </then>
+                        <else>
+                            <assign variable="x" expression="15"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+            <if expression="b&lt;18">
+                <then>
+                    <assign variable="y" expression="20"/>
+                </then>
+                <else>
+                    <if expression="b&gt;25">
+                        <then>
+                            <assign variable="y" expression="10"/>
+                        </then>
+                        <else>
+                            <assign variable="y" expression="15"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+            <if expression="c&lt;18">
+                <then>
+                    <assign variable="z" expression="20"/>
+                </then>
+                <else>
+                    <if expression="c&gt;25">
+                        <then>
+                            <assign variable="z" expression="10"/>
+                        </then>
+                        <else>
+                            <assign variable="z" expression="15"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+            <assign variable="p" expression="0.18*(100-x)*(100-y)*(100-z)"/>
+            <output expression="&quot;Total Harga Tiket Setelah Diskon (Rp)&quot;" newline="True"/>
+            <output expression="p" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
