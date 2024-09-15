@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="2409106010_ZeydanFazleMawla_A1'24_posttest2"/>
+        <attribute name="authors" value="ASUS"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-09-14 07:21:52 PM"/>
+        <attribute name="created" value="QVNVUztMQVBUT1AtSTNHREZUVTc7MjAyNC0wOS0xMzswOToyMDo1MyBQTTsyNjY2"/>
+        <attribute name="edited" value="QVNVUztMQVBUT1AtSTNHREZUVTc7MjAyNC0wOS0xNDswNzoyMTo1MiBQTTsyOzI3NzQ="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="namalengkap, namapanggilan, namaprodi" type="String" array="False" size=""/>
+            <declare name="nim, umur" type="Integer" array="False" size=""/>
+            <declare name="tinggibadan, beratbadan, konversilbs, modnim" type="Real" array="False" size=""/>
+            <output expression="&quot;Masukan Nama Lengkap :&quot;" newline="True"/>
+            <input variable="namalengkap"/>
+            <output expression="&quot;Masukan Nama Panggilan :&quot;" newline="True"/>
+            <input variable="namapanggilan"/>
+            <output expression="&quot;Masukan NIM :&quot;" newline="True"/>
+            <input variable="nim"/>
+            <output expression="&quot;Masukan Nama Prodi :&quot;" newline="True"/>
+            <input variable="namaprodi"/>
+            <output expression="&quot;Masukan Umur :&quot;" newline="True"/>
+            <input variable="umur"/>
+            <output expression="&quot;Masukan Tinggi Badan (m) :&quot;" newline="True"/>
+            <input variable="tinggibadan"/>
+            <output expression="&quot;Masukan Berat Badan (kg) :&quot;" newline="True"/>
+            <input variable="beratbadan"/>
+            <assign variable="konversilbs" expression="beratbadan*2.205"/>
+            <assign variable="modnim" expression="10%6"/>
+            <output expression="&quot;Nama saya &quot; &amp;namalengkap&amp; &quot;, biasa dipanggil &quot; &amp;namapanggilan&amp; &quot; dengan NIM &quot; &amp;nim&amp; &quot; Prodi &quot; &amp;namaprodi&amp; &quot;. Saya berumur &quot; &amp;umur&amp; &quot; tahun&quot; &amp; &quot;, tinggi saya &quot; &amp;tinggibadan&amp; &quot; m dan berat &quot; &amp;beratbadan&amp; &quot; kg atau &quot; &amp;konversilbs&amp; &quot; lbs. &quot; &amp;modnim" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
