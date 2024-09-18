@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="Umur"/>
+        <attribute name="authors" value="ASUS"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-09-18 07:53:44 PM"/>
+        <attribute name="created" value="QVNVUztMQVBUT1AtSTNHREZUVTc7MjAyNC0wOS0xODswNzo1MjoyOCBQTTsyNjc2"/>
+        <attribute name="edited" value="QVNVUztMQVBUT1AtSTNHREZUVTc7MjAyNC0wOS0xODswNzo1Mzo0NCBQTTsxOzI3ODM="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="umur" type="Integer" array="False" size=""/>
+            <input variable="umur"/>
+            <if expression="umur&lt;18">
+                <then>
+                    <output expression="&quot;Kamu anak anak&quot;" newline="True"/>
+                </then>
+                <else>
+                    <output expression="&quot;Kamu Dewasa&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
