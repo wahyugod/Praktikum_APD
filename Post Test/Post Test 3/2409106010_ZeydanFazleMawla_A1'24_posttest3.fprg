@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="2409106010_ZeydanFazleMawla_A1'24_posttest3"/>
+        <attribute name="authors" value="ASUS"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-09-20 08:46:43 PM"/>
+        <attribute name="created" value="QVNVUztMQVBUT1AtSTNHREZUVTc7MjAyNC0wOS0yMDswNzowMjoxNiBQTTsyNjYx"/>
+        <attribute name="edited" value="QVNVUztMQVBUT1AtSTNHREZUVTc7MjAyNC0wOS0yMDswODo0Njo0MyBQTTsyOzI3Nzk="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="jeniskelamin, usia, aktivitas" type="Integer" array="False" size=""/>
+            <declare name="beratbadan, tinggibadan, level, bmr, kaloriharian" type="Real" array="False" size=""/>
+            <output expression="&quot;Pilih Jenis Kelamin&quot;" newline="True"/>
+            <output expression="&quot;[1] Pria&quot;" newline="True"/>
+            <output expression="&quot;[2] Wanita&quot;" newline="True"/>
+            <output expression="&quot;Pilih (1/2)&quot;" newline="True"/>
+            <input variable="jeniskelamin"/>
+            <if expression="jeniskelamin=1 or jeniskelamin=2">
+                <then>
+                    <output expression="&quot;Masukan Berat Badan (gr)&quot;" newline="True"/>
+                    <input variable="beratbadan"/>
+                    <output expression="&quot;Masukan Tinggi Badan (km)&quot;" newline="True"/>
+                    <input variable="tinggibadan"/>
+                    <output expression="&quot;Masukan Usia&quot;" newline="True"/>
+                    <input variable="usia"/>
+                    <output expression="&quot;Pilih Level Aktivitas Harian Anda&quot;" newline="True"/>
+                    <output expression="&quot;[1] Aktivitas Minimal (Jarang Bergerak)&quot;" newline="True"/>
+                    <output expression="&quot;[2] Aktivitas Sedang (Olahraga 1-3 kali Seminggu)&quot;" newline="True"/>
+                    <output expression="&quot;[3] Aktivitas Tinggi (Olahraga 4-7 kali Seminggu)&quot;" newline="True"/>
+                    <output expression="&quot;Pilih (1/2/3)&quot;" newline="True"/>
+                    <input variable="aktivitas"/>
+                    <if expression="aktivitas=1">
+                        <then>
+                            <assign variable="level" expression="1.25"/>
+                        </then>
+                        <else>
+                            <if expression="aktivitas=2">
+                                <then>
+                                    <assign variable="level" expression="1.36"/>
+                                </then>
+                                <else>
+                                    <assign variable="level" expression="1.72"/>
+                                </else>
+                            </if>
+                        </else>
+                    </if>
+                    <if expression="aktivitas=1 or aktivitas=2 or aktivitas=3">
+                        <then>
+                            <if expression="jeniskelamin=1">
+                                <then>
+                                    <assign variable="bmr" expression="(0.01*beratbadan)+(625000*tinggibadan)-(5*usia)+5"/>
+                                </then>
+                                <else>
+                                    <assign variable="bmr" expression="(0.01*beratbadan)+(625000*tinggibadan)-(5*usia)-161"/>
+                                </else>
+                            </if>
+                            <assign variable="kaloriharian" expression="bmr*level"/>
+                            <output expression="&quot;Kalori Yang Anda Butuhkan Adalah &quot; &amp; kaloriharian &amp; &quot; kkal&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <output expression="&quot;Pilihan Hanya Minimal, Sedang, Tinggi&quot;" newline="True"/>
+                        </else>
+                    </if>
+                </then>
+                <else>
+                    <output expression="&quot;Pilihan Hanya Pria atau Wanita&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
