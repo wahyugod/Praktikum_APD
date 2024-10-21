@@ -1,3 +1,5 @@
+# CRUD Manajemen Produk Laptop
+
 # Variabel Global
 user = {
     "kominfo": {"password": "admin#1234", "role": "admin"}
@@ -35,8 +37,12 @@ def tampilkan_produk():
 def tambah_produk():
     global jumlah_produk
     nama_produk = input("Masukan Nama Laptop : ")
+    if nama_produk in produk_laptop:
+        print(f"Produk Dengan Nama '{nama_produk}' Sudah Ada!")
+        return
+
     merek = input("Masukan Merek Laptop : ")
-    
+
     while True:
         try:
             harga = int(input("Masukan Harga : "))
@@ -61,7 +67,7 @@ def ubah_produk():
             if nama_lama != nama_baru:
                 del produk_laptop[nama_lama]
         except ValueError:
-            print("Harga harus berupa angka!")
+            print("Harga Harus Berupa Angka!")
     else:
         print("Nama Tidak Ditemukan!")
         
@@ -84,8 +90,19 @@ def tampilkan_total_harga():
     total = hitung_total_harga()
     print(f"Total Harga Semua Produk: Rp{total}")
 
-# Sesi Login
-while True:
+def user_register():
+    username_baru = input("Masukkan Username Baru : ")
+    password_baru = input("Masukkan Password Baru : ")
+
+    # Pengecekan Nama Pengguna
+    if username_baru in user:
+        print("Nama Pengguna Sudah Terdaftar!")
+    else:
+        role_baru = "pengunjung"
+        user[username_baru] = {"password": password_baru, "role": role_baru}
+        print(f"Pendaftaran Berhasil Untuk {username_baru} Dengan Role {role_baru}!")
+
+def login_menu():
     print("\n=================================")
     print("|    Toko Laptop Wahyu Jaya     |")
     print("=================================")
@@ -93,6 +110,23 @@ while True:
     print("| 2. Register                   |")
     print("| 3. Keluar                     |")
     print("=================================")
+
+def main_menu():
+    print("\n=================================")
+    print("|    Toko Laptop Wahyu Jaya     |")
+    print("=================================")
+    print("| 1. Tampilkan Produk           |")
+    if role == "admin":
+        print("| 2. Tambah Produk              |")
+        print("| 3. Ubah Produk                |")
+        print("| 4. Hapus Produk               |")
+    print("| 5. Tampilkan Total Harga      |")
+    print("| 6. Keluar                     |")
+    print("=================================")
+
+# Sesi Login
+while True:
+    login_menu()
     pilihan = input("Masukan Pilihan : ")
 
     if pilihan == "1":
@@ -103,20 +137,10 @@ while True:
 
         # Program Utama CRUD
         if role:
-            print("\n=================================")
-            print("|    Toko Laptop Wahyu Jaya     |")
-            print("=================================")
-            print("| 1. Tampilkan Produk           |")
-            if role == "admin":
-                print("| 2. Tambah Produk              |")
-                print("| 3. Ubah Produk                |")
-                print("| 4. Hapus Produk               |")
-            print("| 5. Tampilkan Total Harga      |")
-            print("| 6. Keluar                     |")
-            print("=================================")
-
             while True:
+                main_menu()
                 pilih = input("\nMasukan Pilihan : ")
+
                 if pilih == "1":
                     tampilkan_produk()
 
@@ -141,16 +165,8 @@ while True:
 
     # Register Hanya Untuk Pengunjung
     elif pilihan == "2":
-        username_baru = input("Masukkan Username Baru : ")
-        password_baru = input("Masukkan Password Baru : ")
+        user_register()
 
-        # Pengecekan Nama Pengguna
-        if username_baru in user:
-            print("Nama Pengguna Sudah Terdaftar!")
-        else:
-            role_baru = "pengunjung"
-            user[username_baru] = {"password": password_baru, "role": role_baru}
-            print(f"Pendaftaran Berhasil Untuk {username_baru} Dengan Role {role_baru}!")
     # Keluar
     elif pilihan == "3":
         print("Terima Kasih Telah Berkunjung.")
