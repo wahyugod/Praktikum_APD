@@ -59,7 +59,7 @@
 # finally:
 #     print("selesai")
 
-path = "./folder_ini/data.txt"
+# path = "./folder_ini/data.txt"
 # file = open(path, "w")
 
 # with open(path, "r") as file:
@@ -76,8 +76,12 @@ path = "./folder_ini/data.txt"
 #     konten = file.read()
 #     print(konten)
 
-try:
-    with open("data.txt") as file:
-        print(file.read())
-except FileNotFoundError:
-    print("File tidak ditemukan")
+# try:
+#     with open("data.txt") as file:
+#         print(file.read())
+# except FileNotFoundError:
+#     print("File tidak ditemukan")
+
+path = "./folder_ini/faiz.csv"
+with open(path, "w") as file:
+    file.write("lele")
