@@ -82,6 +82,9 @@
 # except FileNotFoundError:
 #     print("File tidak ditemukan")
 
-path = "./folder_ini/faiz.csv"
-with open(path, "w") as file:
-    file.write("lele")
+# path = "./folder_ini/faiz.csv"
+# with open(path, "w") as file:
+#     file.write("lele")
+
+lele = "anu"
+print(type(lele))

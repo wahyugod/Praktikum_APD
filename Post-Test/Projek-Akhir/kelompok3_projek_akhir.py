@@ -2,7 +2,7 @@
 
 # Variabel Global
 user = {
-    "kominfo": {"password": "admin#1234", "role": "admin"}
+    "admin": {"password": "admin", "role": "admin"}
 }
 produk_laptop = {}
 jumlah_produk = 0
