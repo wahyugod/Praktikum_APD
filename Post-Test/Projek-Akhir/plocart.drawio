@@ -1033,7 +1033,7 @@
         <mxCell id="NbN3X4kHAbAlBsqgk9l0-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="5-pVA2sYH-lpSdvYK8ub-2" target="NbN3X4kHAbAlBsqgk9l0-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="5-pVA2sYH-lpSdvYK8ub-2" value="Menu Admin" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=offPageConnector;rounded=0;size=0.5;" parent="1" vertex="1">
+        <mxCell id="5-pVA2sYH-lpSdvYK8ub-2" value="Menu Pengunjung" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=offPageConnector;rounded=0;size=0.5;" parent="1" vertex="1">
           <mxGeometry x="89" y="10" width="60" height="60" as="geometry" />
         </mxCell>
         <mxCell id="5-pVA2sYH-lpSdvYK8ub-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="5-pVA2sYH-lpSdvYK8ub-6" target="5-pVA2sYH-lpSdvYK8ub-9" edge="1">

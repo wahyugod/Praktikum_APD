@@ -84,9 +84,9 @@ def tampilkan_produk():
         
 # Prosedur Untuk Menambah Produk
 def tambah_produk():
-    nama_produk = input("\nMasukan Nama Laptop : ")
+    nama_produk = input(BOLD+"\nMasukan Nama Laptop : "+RESET)
     if not nama_produk.strip():
-        print('Input tidak boleh kosong')
+        print(RED+"Input Tidak Boleh Kosong"+RESET)
         return
     else:
         pass
@@ -94,27 +94,27 @@ def tambah_produk():
         print(f"Produk Dengan Nama '{nama_produk}' Sudah Ada!")
         return
 
-    merek = input("Masukan Merek Laptop : ")
+    merek = input(BOLD+"Masukan Merek Laptop : "+RESET)
     if not merek.strip():
-        print('Input tidak boleh kosong')
+        print(RED+"Input Tidak Boleh Kosong"+RESET)
         return
     else:
         pass
-    prosesor = input("Masukan Prosesor Laptop : ")
+    prosesor = input(BOLD+"Masukan Prosesor Laptop : "+RESET)
     if not prosesor.strip():
-        print('Input tidak boleh kosong')
+        print(RED+"Input Tidak Boleh Kosong"+RESET)
         return
     else:
         pass
-    vga = input("Masukan VGA Laptop : ")
+    vga = input(BOLD+"Masukan VGA Laptop : "+RESET)
     if not vga.strip():
-        print('Input tidak boleh kosong')
+        print(RED+"Input Tidak Boleh Kosong"+RESET)
         return
     else:
         pass
 
     try:
-        harga = int(input("Masukan Harga : "))
+        harga = int(input(BOLD+"Masukan Harga : "+RESET))
     except ValueError:
         print("Harga harus berupa angka!")
         return
@@ -131,37 +131,37 @@ def tambah_produk():
 # Prosedur Untuk Mengubah Produk
 def ubah_produk():
     tampilkan_produk()
-    nama_lama = input("Masukan Nama Produk yang ingin diubah: ")
+    nama_lama = input(BOLD+"Masukan Nama Produk yang ingin diubah: "+RESET)
 
     if nama_lama in produk_laptop:
         try:
-            nama_baru = input("Masukan Nama Baru : ")
+            nama_baru = input(BOLD+"Masukan Nama Baru : "+RESET)
             if not nama_baru.strip():
-                print('Input tidak boleh kosong')
+                print(RED+"Input Tidak Boleh Kosong"+RESET)
                 return
             else:
                 pass
-            merek_baru = input("Masukan Merek Baru : ")
+            merek_baru = input(BOLD+"Masukan Merek Baru : "+RESET)
             if not merek_baru.strip():
-                print('Input tidak boleh kosong')
+                print(RED+"Input Tidak Boleh Kosong"+RESET)
                 return
             else:
                 pass
-            prosesor_baru = input("Masukan Prosesor Baru : ")
+            prosesor_baru = input(BOLD+"Masukan Prosesor Baru : "+RESET)
             if not prosesor_baru.strip():
-                print('Input tidak boleh kosong')
+                print(RED+"Input Tidak Boleh Kosong"+RESET)
                 return
             else:
                 pass
-            vga_baru = input("Masukan VGA Baru : ")
+            vga_baru = input(BOLD+"Masukan VGA Baru : "+RESET)
             if not vga_baru.strip():
-                print('Input tidak boleh kosong')
+                print(RED+"Input Tidak Boleh Kosong"+RESET)
                 return
             else:
                 pass
             
             try:
-                harga_baru = int(input("Masukan Harga Baru : "))
+                harga_baru = int(input(BOLD+"Masukan Harga Baru : "+RESET))
             except ValueError:
                 print("Harga harus berupa angka!")
                 return
@@ -189,7 +189,7 @@ def hapus_produk():
     if len(produk_laptop) == 0:
         print("Tidak Ada Produk Yang Dapat Dihapus!")
     else:
-        nama_lama = input("Masukan Nama Yang Ingin Dihapus : ")
+        nama_lama = input(BOLD+"Masukan Nama Yang Ingin Dihapus : "+RESET)
         if nama_lama in produk_laptop:
             del produk_laptop[nama_lama]
             simpan_data_csv()
@@ -202,7 +202,7 @@ def beli_produk(username):
         print("Tidak ada produk yang tersedia untuk dibeli.")
     else:
         tampilkan_produk()
-        nama_produk = input("Masukkan nama produk yang ingin dibeli: ")
+        nama_produk = input(BOLD+"Masukkan nama produk yang ingin dibeli: "+RESET)
         if nama_produk in produk_laptop:
             produk_dibeli.append(produk_laptop[nama_produk]) 
             user[username]["produk_dibeli"].append(nama_produk) 
@@ -241,13 +241,13 @@ def muat_data_csv():
         print(RED+"File data_produk.csv tidak ditemukan"+RESET)
 
 def user_register():
-    username_baru = input("\nMasukkan Username Baru : ")
+    username_baru = input(BOLD+"\nMasukkan Username Baru : "+RESET)
     if not username_baru.strip():
-        print('Input tidak boleh kosong')
+        print(RED+"Input Tidak Boleh Kosong"+RESET)
     else:
-        password_baru = input("Masukkan Password Baru : ")
+        password_baru = input(BOLD+"Masukkan Password Baru : "+RESET)
         if not password_baru.strip():
-            print('Input tidak boleh kosong')
+            print(RED+"Input Tidak Boleh Kosong"+RESET)
         else:
             if username_baru in user:
                 print("Nama Pengguna Sudah Terdaftar!")
