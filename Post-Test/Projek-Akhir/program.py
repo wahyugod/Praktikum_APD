@@ -115,6 +115,11 @@ def tambah_produk():
 
     try:
         harga = int(input(BOLD+"Masukan Harga : "+RESET))
+        if harga <= 0:
+            print(RED+"Harga Tidak Boleh Minus atau 0"+RESET)
+            return
+        else:
+            pass
     except ValueError:
         print("Harga harus berupa angka!")
         return
@@ -298,9 +303,9 @@ def main_menu():
         animasi_output("|    Toko Laptop Wahyu Jaya     |", delay=0.0000001)
         animasi_output("=================================", delay=0.0000001)
         animasi_output("| 1. Tampilkan Produk           |", delay=0.0000001)
-        animasi_output("| 4. Beli Produk                |", delay=0.0000001)
-        animasi_output("| 5. Tampilkan Total Harga      |", delay=0.0000001)
-        animasi_output("| 7. Keluar                     |", delay=0.0000001)
+        animasi_output("| 2. Beli Produk                |", delay=0.0000001)
+        animasi_output("| 3. Tampilkan Total Harga      |", delay=0.0000001)
+        animasi_output("| 4. Keluar                     |", delay=0.0000001)
         animasi_output("================================="+RESET, delay=0.0000001)
 
 def back():
@@ -341,23 +346,38 @@ while True:
                     back()
                     loading(2)
                     clear()
+                
+                elif pilih == "2" and role == "pengunjung":
+                    beli_produk(username)
+                    back()
+                    loading(2)
+                    clear()
 
                 elif pilih == "3" and role == "admin":
                     ubah_produk()
                     back()
                     loading(2)
                     clear()
-
-                elif pilih == "4":
-                    if role == "admin":
-                        hapus_produk()
-                    else:
-                        beli_produk(username)
+                
+                elif pilih == "3" and role == "pengunjung":
+                    tampilkan_total_harga()
                     back()
                     loading(2)
                     clear()
 
-                elif pilih == "5":
+                elif pilih == "4"and role == "admin":
+                    hapus_produk()
+                    back()
+                    loading(2)
+                    clear()
+
+                elif pilih == "4" and role == "pengunjung":
+                    print("Terima Kasih Telah Melihat Produk Kami")
+                    loading(2)
+                    clear()
+                    break
+
+                elif pilih == "5" and role == "admin":
                     tampilkan_total_harga()
                     back()
                     loading(2)
@@ -369,7 +389,7 @@ while True:
                     loading(2)
                     clear()
 
-                elif pilih == "7":
+                elif pilih == "7" and role == "admin":
                     print("Terima Kasih Telah Melihat Produk Kami")
                     loading(2)
                     clear()
