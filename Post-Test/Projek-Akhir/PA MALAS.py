@@ -6,22 +6,11 @@ import sys
 
 #Warna
 BOLD = '\033[1m'
-BLACK = '\033[30m'
 RED = '\033[31m'
 GREEN = '\033[32m'
-YELLOW = '\033[33m' 
-BLUE = '\033[34m'
 MAGENTA = '\033[35m'
-CYAN = '\033[36m'
-LIGHT_GRAY = '\033[37m'
-DARK_GRAY = '\033[90m'
-BRIGHT_RED = '\033[91m'
-BRIGHT_GREEN = '\033[92m'
 BRIGHT_YELLOW = '\033[93m'
 BRIGHT_BLUE = '\033[94m'
-BRIGHT_MAGENTA = '\033[95m'
-BRIGHT_CYAN = '\033[96m'
-WHITE = '\033[97m'
 RESET = '\033[0m' 
 
 # CRUD Manajemen Produk Laptop
@@ -36,7 +25,7 @@ produk_dibeli = []
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
-def animasi_output(teks, delay=0.0000001):
+def animasi_output(teks, delay=0.5):
     for huruf in teks:
        sys.stdout.write(huruf)
        sys.stdout.flush()
@@ -78,165 +67,176 @@ def tampilkan_produk():
     if len(produk_laptop) == 0:
         print("Produk Kosong!")
     else:
-        tabel_data = [[nama, data['merek'], data['prosesor'], data['vga'], f"Rp{data['harga']}"] 
-        for nama, data in produk_laptop.items()]
-        animasi_output(tabulate(tabel_data, headers=["Nama", "Merek", "Prosesor", "VGA", "Harga"], tablefmt="grid"), delay=0.0000001)
-        
+        tabel_data = [[no, data["nama"], data['merek'], data['prosesor'], data['vga'], f"Rp{data['harga']}"]
+                      for no, data in produk_laptop.items()]
+        print(tabulate(tabel_data, headers=["No", "Nama", "Merek", "Prosesor", "VGA", "Harga"], tablefmt="grid"))
+
 # Prosedur Untuk Menambah Produk
 def tambah_produk():
-    nama_produk = input(BOLD+"\nMasukan Nama Laptop : "+RESET)
+    nama_produk = input(BOLD + "\nMasukan Nama Laptop Yang Ingin Ditambah: " + RESET)
     if not nama_produk.strip():
-        print(RED+"Input Tidak Boleh Kosong"+RESET)
+        print(RED + "Input Tidak Boleh Kosong" + RESET)
         return
-    else:
-        pass
-    if nama_produk in produk_laptop:
-        print(f"Produk Dengan Nama '{nama_produk}' Sudah Ada!")
+    nama_produk = nama_produk.upper()
+
+    for produk in produk_laptop.values():
+        if produk["nama"] == nama_produk:
+            print(RED + f"Produk Dengan Nama '{nama_produk}' Sudah Ada!" + RESET)
+            return
+
+    merek = input(BOLD + "Masukan Merek Laptop : " + RESET)
+    if not merek.strip():
+        print(RED + "Input Tidak Boleh Kosong" + RESET)
         return
 
-    merek = input(BOLD+"Masukan Merek Laptop : "+RESET)
-    if not merek.strip():
-        print(RED+"Input Tidak Boleh Kosong"+RESET)
-        return
-    else:
-        pass
-    prosesor = input(BOLD+"Masukan Prosesor Laptop : "+RESET)
+    prosesor = input(BOLD + "Masukan Prosesor Laptop : " + RESET)
     if not prosesor.strip():
-        print(RED+"Input Tidak Boleh Kosong"+RESET)
+        print(RED + "Input Tidak Boleh Kosong" + RESET)
         return
-    else:
-        pass
-    vga = input(BOLD+"Masukan VGA Laptop : "+RESET)
+
+    vga = input(BOLD + "Masukan VGA Laptop : " + RESET)
     if not vga.strip():
-        print(RED+"Input Tidak Boleh Kosong"+RESET)
+        print(RED + "Input Tidak Boleh Kosong" + RESET)
         return
-    else:
-        pass
 
     try:
-        harga = int(input(BOLD+"Masukan Harga : "+RESET))
+        harga = int(input(BOLD + "Masukan Harga : " + RESET))
         if harga <= 0:
-            print(RED+"Harga Tidak Boleh Minus atau 0"+RESET)
+            print(RED + "Harga Tidak Boleh Minus atau 0" + RESET)
             return
-        else:
-            pass
     except ValueError:
-        print("Harga harus berupa angka!")
+        print(RED + "Harga Harus Berupa Angka!" + RESET)
         return
-            
-    produk_laptop[nama_produk] = {
+
+    # Tambahkan produk ke dictionary
+    produk_laptop[len(produk_laptop) + 1] = {
+        "nama": nama_produk,
         "merek": merek,
         "prosesor": prosesor,
         "vga": vga,
-        "harga": harga
+        "harga": harga,
     }
     simpan_data_csv()
-    print(f"Produk {nama_produk} berhasil ditambahkan.")
+    print(GREEN + f"Produk '{nama_produk}' Berhasil Ditambahkan!" + RESET)
+
 
 # Prosedur Untuk Mengubah Produk
 def ubah_produk():
     tampilkan_produk()
-    nama_lama = input(BOLD+"Masukan Nama Produk yang ingin diubah: "+RESET)
+    try:
+        nomor = int(input(BOLD+"Masukkan Nomor Produk yang ingin diubah: "+RESET))
+        if nomor in produk_laptop:
+            produk = produk_laptop[nomor]
+            nama_baru = input(BOLD+"Masukan Nama Baru : "+RESET) or produk["nama"]
 
-    if nama_lama in produk_laptop:
-        try:
-            nama_baru = input(BOLD+"Masukan Nama Baru : "+RESET)
-            if not nama_baru.strip():
-                print(RED+"Input Tidak Boleh Kosong"+RESET)
-                return
-            else:
-                pass
-            merek_baru = input(BOLD+"Masukan Merek Baru : "+RESET)
-            if not merek_baru.strip():
-                print(RED+"Input Tidak Boleh Kosong"+RESET)
-                return
-            else:
-                pass
-            prosesor_baru = input(BOLD+"Masukan Prosesor Baru : "+RESET)
-            if not prosesor_baru.strip():
-                print(RED+"Input Tidak Boleh Kosong"+RESET)
-                return
-            else:
-                pass
-            vga_baru = input(BOLD+"Masukan VGA Baru : "+RESET)
-            if not vga_baru.strip():
-                print(RED+"Input Tidak Boleh Kosong"+RESET)
-                return
-            else:
-                pass
+            for produk in produk_laptop.values():
+                if produk["nama"] == nama_baru.upper():
+                    print(RED + f"Produk Dengan Nama '{nama_baru}' Sudah Ada!" + RESET)
+                    return
             
-            try:
-                harga_baru = int(input(BOLD+"Masukan Harga Baru : "+RESET))
-            except ValueError:
-                print("Harga harus berupa angka!")
+            if not nama_baru.strip():
+                print(RED+ 'Input Tidak Boleh Kosong'+RESET)
                 return
 
-            produk_laptop[nama_baru] = {
+            merek_baru = input(BOLD+"Masukan Merek Baru : "+RESET) or produk["merek"]
+            if not merek_baru.strip():
+                print(RED+ 'Input Tidak Boleh Kosong'+RESET)
+                return
+            prosesor_baru = input(BOLD+"Masukan Prosesor Baru : "+RESET) or produk["prosesor"]
+            if not prosesor_baru.strip():
+                print(RED+ 'Input Tidak Boleh Kosong'+RESET)
+                return
+            vga_baru = input(BOLD+"Masukan VGA Baru : "+RESET) or produk["vga"]
+            if not vga_baru.strip():
+                print(RED+ 'Input Tidak Boleh Kosong'+RESET)
+                return
+            harga_baru = int(input(BOLD+"Masukan Harga Baru : "+RESET) or produk["harga"])
+            if harga_baru <= 0:
+                print(RED + "Harga Tidak Boleh Minus atau 0" + RESET)
+                return
+            produk_laptop[nomor] = {
+                "nama": nama_baru,
                 "merek": merek_baru,
                 "prosesor": prosesor_baru,
                 "vga": vga_baru,
                 "harga": harga_baru
             }
-
-            if nama_lama != nama_baru:
-                del produk_laptop[nama_lama]
             simpan_data_csv()
             print("Produk Berhasil Diubah!")
+        else:
+            print(RED+"Nomor Tidak Ditemukan!"+RESET)
+    except ValueError:
+        print(RED+"Input Harus Berupa Angka!"+RESET)
 
-        except ValueError:
-            print("Harga Harus Berupa Angka!")
-    else:
-        print("Nama Tidak Ditemukan!")
-        
 # Prosedur Hapus Produk
 def hapus_produk():
     tampilkan_produk()
-    if len(produk_laptop) == 0:
-        print("Tidak Ada Produk Yang Dapat Dihapus!")
-    else:
-        nama_lama = input(BOLD+"Masukan Nama Yang Ingin Dihapus : "+RESET)
-        if nama_lama in produk_laptop:
-            del produk_laptop[nama_lama]
+    try:
+        nomor = int(input(BOLD+"Masukkan Nomor Produk yang ingin dihapus: "+RESET))
+        if nomor in produk_laptop:
+            del produk_laptop[nomor]
+            rapikan_nomor_produk()
             simpan_data_csv()
-            print(f"Produk {nama_lama} berhasil dihapus.")
+            print(f"Produk dengan nomor {nomor} berhasil dihapus.")
         else:
-            print("Nama Tidak ditemukan!")
+            print(RED+"Nomor Tidak Ditemukan!"+RESET)
+    except ValueError:
+        print(RED+"Input Harus Berupa Angka!"+RESET)
 
 def beli_produk(username):
-    if len(produk_laptop) == 0:
-        print("Tidak ada produk yang tersedia untuk dibeli.")
-    else:
-        tampilkan_produk()
-        nama_produk = input(BOLD+"Masukkan nama produk yang ingin dibeli: "+RESET)
-        if nama_produk in produk_laptop:
-            produk_dibeli.append(produk_laptop[nama_produk]) 
-            user[username]["produk_dibeli"].append(nama_produk) 
-            del produk_laptop[nama_produk]
+    tampilkan_produk()
+    try:
+        nomor = int(input(BOLD+"Masukkan Nomor Produk yang ingin dibeli: "+RESET))
+        if nomor in produk_laptop:
+            produk = produk_laptop.pop(nomor)
+            produk_dibeli.append(produk)
+            user[username]["produk_dibeli"].append(produk["nama"])
+            rapikan_nomor_produk()
             simpan_data_csv()
-            print(f"Produk '{nama_produk}' berhasil dibeli dan dihapus dari daftar produk.")
+            print(f"Produk '{produk['nama']}' berhasil dibeli.")
         else:
-            print("Produk tidak ditemukan!")
+            print(RED+"Nomor Tidak Ditemukan!"+RESET)
+    except ValueError:
+        print(RED+"Input Harus Berupa Angka!"+RESET)
 
 # Fungsi Total Harga
 def tampilkan_total_harga():
     total = hitung_total_harga()
     print(f"\nTotal Harga Semua Produk: Rp{total}")
 
+# Fungsi Total Harga untuk Produk yang Dibeli Pengunjung
+def tampilkan_total_harga_pengunjung(username):
+    if not user[username]["produk_dibeli"]:
+        print("Anda belum membeli produk apa pun.")
+        return
+
+    total_harga = 0
+    for produk in produk_dibeli:
+        if produk["nama"] in user[username]["produk_dibeli"]:
+            total_harga += produk["harga"]
+    print(f"\nTotal Harga Produk yang Anda Beli: Rp{total_harga}")
+
+def rapikan_nomor_produk():
+    produk_laptop_urut = {i+1: data for i, data in enumerate(produk_laptop.values())}
+    produk_laptop.clear()
+    produk_laptop.update(produk_laptop_urut)
+
 # Fungsi Simpan Data ke CSV
 def simpan_data_csv():
     with open('data_produk.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["Nama", "Merek", "Prosesor", "VGA", "Harga"])
-        for nama, data in produk_laptop.items():
-            writer.writerow([nama, data["merek"], data["prosesor"], data["vga"], data["harga"]])
+        for data in produk_laptop.values():
+            writer.writerow([data["nama"], data["merek"], data["prosesor"], data["vga"], data["harga"]])
 
 # Fungsi Muat Data dari CSV
 def muat_data_csv():
     try:
         with open('data_produk.csv', 'r') as file:
             reader = csv.DictReader(file)
-            for row in reader:
-                produk_laptop[row["Nama"]] = {
+            for i, row in enumerate(reader, start=1):
+                produk_laptop[i] = {
+                    "nama": row["Nama"],
                     "merek": row["Merek"],
                     "prosesor": row["Prosesor"],
                     "vga": row["VGA"],
@@ -274,39 +274,39 @@ def tampilkan_data_user():
                 produk_dibeli = ", ".join(data["produk_dibeli"]) if data["produk_dibeli"] else "Tidak ada"
                 tabel_data.append([username, data['password'], produk_dibeli])
         
-        animasi_output(tabulate(tabel_data, headers=["Username", "Password", "Produk Dibeli"], tablefmt="grid"), delay=0.0000001)
+        animasi_output(tabulate(tabel_data, headers=["Username", "Password", "Produk Dibeli"], tablefmt="grid"), delay=0.01)
 
 def login_menu():
-    animasi_output(GREEN+"\n=================================", delay=0.0000001)
-    animasi_output("|    Toko Laptop Wahyu Jaya     |", delay=0.0000001)
-    animasi_output("=================================", delay= 0.0000001)
-    animasi_output("| 1. Login                      |", delay= 0.0000001)
-    animasi_output("| 2. Register                   |", delay= 0.0000001)
-    animasi_output("| 3. Keluar                     |", delay= 0.0000001)
-    animasi_output("================================="+RESET, delay=0.0000001)
+    animasi_output(GREEN+"\n=================================", delay=0.01)
+    animasi_output("|    Toko Laptop Wahyu Jaya     |", delay=0.01)
+    animasi_output("=================================", delay= 0.01)
+    animasi_output("| 1. Login                      |", delay= 0.01)
+    animasi_output("| 2. Register                   |", delay= 0.01)
+    animasi_output("| 3. Keluar                     |", delay= 0.01)
+    animasi_output("================================="+RESET, delay=0.01)
 
 def main_menu():
     if role == "admin":
-        animasi_output(MAGENTA+"\n=================================", delay=0.0000001)
-        animasi_output("|    Toko Laptop Wahyu Jaya     |", delay=0.0000001)
-        animasi_output("=================================", delay=0.0000001)
-        animasi_output("| 1. Tampilkan Produk           |", delay=0.0000001)
-        animasi_output("| 2. Tambah Produk              |", delay=0.0000001)
-        animasi_output("| 3. Ubah Produk                |", delay=0.0000001)
-        animasi_output("| 4. Hapus Produk               |", delay=0.0000001)
-        animasi_output("| 5. Tampilkan Total Harga      |", delay=0.0000001)
-        animasi_output("| 6. Tampilkan Data User        |", delay=0.0000001)
-        animasi_output("| 7. Keluar                     |", delay=0.0000001)
-        animasi_output("================================="+RESET, delay=0.0000001)
+        animasi_output(MAGENTA+"\n=================================", delay=0.01)
+        animasi_output("|    Toko Laptop Wahyu Jaya     |", delay=0.01)
+        animasi_output("=================================", delay=0.01)
+        animasi_output("| 1. Tampilkan Produk           |", delay=0.01)
+        animasi_output("| 2. Tambah Produk              |", delay=0.01)
+        animasi_output("| 3. Ubah Produk                |", delay=0.01)
+        animasi_output("| 4. Hapus Produk               |", delay=0.01)
+        animasi_output("| 5. Tampilkan Total Harga      |", delay=0.01)
+        animasi_output("| 6. Tampilkan Data User        |", delay=0.01)
+        animasi_output("| 7. Keluar                     |", delay=0.01)
+        animasi_output("================================="+RESET, delay=0.01)
     else:
-        animasi_output(BRIGHT_YELLOW+"\n=================================", delay=0.0000001)
-        animasi_output("|    Toko Laptop Wahyu Jaya     |", delay=0.0000001)
-        animasi_output("=================================", delay=0.0000001)
-        animasi_output("| 1. Tampilkan Produk           |", delay=0.0000001)
-        animasi_output("| 2. Beli Produk                |", delay=0.0000001)
-        animasi_output("| 3. Tampilkan Total Harga      |", delay=0.0000001)
-        animasi_output("| 4. Keluar                     |", delay=0.0000001)
-        animasi_output("================================="+RESET, delay=0.0000001)
+        animasi_output(BRIGHT_YELLOW+"\n=================================", delay=0.01)
+        animasi_output("|    Toko Laptop Wahyu Jaya     |", delay=0.01)
+        animasi_output("=================================", delay=0.01)
+        animasi_output("| 1. Tampilkan Produk           |", delay=0.01)
+        animasi_output("| 2. Beli Produk                |", delay=0.01)
+        animasi_output("| 3. Tampilkan Total Harga      |", delay=0.01)
+        animasi_output("| 4. Keluar                     |", delay=0.01)
+        animasi_output("================================="+RESET, delay=0.01)
 
 def back():
     input("Tekan Enter Untuk Melanjutkan...")
@@ -342,6 +342,7 @@ while True:
                     clear()
 
                 elif pilih == "2" and role == "admin":
+                    tampilkan_produk()
                     tambah_produk()
                     back()
                     loading(2)
@@ -360,7 +361,7 @@ while True:
                     clear()
                 
                 elif pilih == "3" and role == "pengunjung":
-                    tampilkan_total_harga()
+                    tampilkan_total_harga_pengunjung(username)
                     back()
                     loading(2)
                     clear()
@@ -397,6 +398,8 @@ while True:
 
                 else:
                     print("Pilihan Tidak Valid!")
+                    loading(1)
+                    clear()
 
     # Register Hanya Untuk Pengunjung
     elif pilihan == "2":
@@ -414,3 +417,4 @@ while True:
     else:
         print("Pilihan Tidak Valid!")
         loading(1)
+        clear()
